@@ -1,7 +1,7 @@
 {
   "name": "mini-horn",
   "description": "小喇叭",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "author": "yangheng",
   "license": "MIT",
   "main": "./dist/index.js",
