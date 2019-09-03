@@ -105,9 +105,9 @@
               }, this.a_time);
             }
           }
-          requestAnimationFrame(step);
+          this.timer = requestAnimationFrame(step);
         }.bind(this);
-        requestAnimationFrame(step);
+        this.timer = requestAnimationFrame(step);
       },
 
       // 一步一步的走
@@ -118,16 +118,26 @@
         const max_abs = this.firstOffset + this.maxScroll;
 
         const step = function () {
-          _this.translate -= stepOffset;
-          if (Math.abs(_this.translate) >= max_abs) {
-            _this.moving = false;
-            _this.$nextTick(() => {
-              _this.translate = -_this.firstOffset;
+          this.translate -= stepOffset;
+          if (Math.abs(this.translate) >= max_abs) {
+            this.moving = false;
+            this.$nextTick(() => {
+              this.translate = -this.firstOffset;
             })
           }
-          requestAnimationFrame(step);
-        };
-        requestAnimationFrame(step)
+          this.timer = requestAnimationFrame(step);
+        }.bind(this);
+        this.timer = requestAnimationFrame(step)
+      },
+      clearHorn () {
+        cancelAnimationFrame(this.timer);
+      },
+      refresh() {
+        this.$nextTick(() => {
+          this.moving = false;
+          this.clearHorn();
+          this.init();
+        })
       },
       init () {
         this.calculateOffset();
