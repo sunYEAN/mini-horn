@@ -73,16 +73,17 @@
         this.maxScroll = max;
       },
       insertCloneNode () {
-        const cloneNodes = this.wrap.cloneNode(true);
+        const cloneNodes = this.wrap;
         const children = cloneNodes.children;
-        const firstNode = children[0];
-        const lastNode = children[children.length - 1];
+        const firstNode = children[0].cloneNode(true);
+        const lastNode = children[children.length - 1].cloneNode(true);
         this.wrap.insertBefore(lastNode, this.wrap.children[0]);
         this.wrap.appendChild(firstNode);
       },
       initFirstStep () {
-        const firstStep = this.wrap.children[0];
+        const firstStep = this.$refs.container;
         const d = this.direction === 'horizontal' ? 'offsetWidth' : 'offsetHeight';
+        console.log(firstStep[d])
         this.firstOffset = firstStep[d];
         this.translate = -firstStep[d];
       },
@@ -162,9 +163,9 @@
   .horn-container{
     color: #fff;
     width: 100px;
-    height: 20px;
+    display: flex;
     overflow: hidden;
-    font-size: 12px;
+    font-size: 32px;
     border-radius: 10px;
     background-color: orangered;
     .horn-wrap{
